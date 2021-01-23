@@ -1,0 +1,26 @@
+{
+  "name": "valo-om-api",
+  "version": "0.0.1",
+  "description": "This is an unofficial NodeJS library for interacting with the [VALORANT](https://playvalorant.com/) APIs used in game.",
+  "main": "./src/index.js",
+  "dependencies": {
+    "@liamcottle/valorant.js": "^1.2.0",
+    "axios": "^0.21.1",
+    "axios-cookiejar-support": "^1.0.1",
+    "follow-redirects": "^1.13.1",
+    "is-redirect": "^1.0.0",
+    "json-stringify-safe": "^5.0.1",
+    "pify": "^5.0.0",
+    "psl": "^1.8.0",
+    "punycode": "^2.1.1",
+    "querystring": "^0.2.0",
+    "tough-cookie": "^4.0.0",
+    "universalify": "^0.1.2",
+    "url": "^0.11.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
