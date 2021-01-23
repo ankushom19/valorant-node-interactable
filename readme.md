@@ -1,4 +1,4 @@
-# VALORANT API INTERACTABLE  ( BASED ON VALORANT.js )
+# VALORANT API INTERACTABLE   BASED ON VALORANT.js 
 
 This is an unofficial NodeJS App for interacting with the [VALORANT](https://playvalorant.com/) APIs used in game. Based On  @liamcottle/valorant.js
 
