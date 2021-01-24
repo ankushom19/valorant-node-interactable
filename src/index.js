@@ -1,5 +1,5 @@
 const Valorant = require('@liamcottle/valorant.js');
-const valorantApi = new Valorant.API(Valorant.Regions.AsiaPacific);
+const valorantApi = new Valorant.API(Valorant.Regions.Your Region);
 const fs = require("fs");
 const stringify = require('json-stringify-safe');
 
