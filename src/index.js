@@ -3,48 +3,13 @@ const valorantApi = new Valorant.API(Valorant.Regions.AsiaPacific);
 const fs = require("fs");
 const stringify = require('json-stringify-safe');
 
+app();
 
-function MatchData() {
+function app() {
 
-  var MatchID = "Your Match ID (Can Be Fetched from Player Match Data)";
-  valorantApi.getMatch(MatchID).then((response) => {
 
-    let data = stringify(response.data);
-
-    var writeStream = fs.createWriteStream("MatchData" + MatchID + ".json");
-    writeStream.write(data);
-    writeStream.end();
-  });
-}
-
-function PlayerMatchData() {
-  valorantApi.getPlayerMatchHistory(valorantApi.user_id).then((response) => {
-
-    let data = stringify(response.data);
-
-    var writeStream = fs.createWriteStream("PlayerInfo" + valorantApi.user_id + ".json");
-
-    writeStream.write(data);
-    writeStream.end();
-  });
-}
-
-function PlayerMMR() {
-  valorantApi.getPlayerMMR(valorantApi.user_id).then((response) => {
-
-    let data = stringify(response.data.LatestCompetitiveUpdate);
-
-    var writeStream = fs.createWriteStream("PlayerMMR" + valorantApi.user_id + ".json");
-
-    writeStream.write(data);
-    writeStream.end();
-  });
-}
-
-function RUN() {
-
-  var RiotUser = 'username here';
-  var RiotPass = 'password here';
+  var RiotUser = 'user id';
+  var RiotPass = 'pass';
   valorantApi.authorize(RiotUser, RiotPass).then(() => {
     const readline = require('readline').createInterface({
       input: process.stdin,
@@ -71,5 +36,50 @@ function RUN() {
   });
 }
 
+function MatchData() {
 
-RUN();
+  var MatchID = "dd060740-cafa-49fe-b147-509fbf3abf3a";
+  valorantApi.getMatch(MatchID).then((response) => {
+
+    let data = stringify(response.data);
+
+    var writeStream = fs.createWriteStream("MatchData" + MatchID + ".json");
+    writeStream.write(data);
+    writeStream.end();
+  });
+}
+
+function PlayerMatchData() {
+  valorantApi.getPlayerMatchHistory(valorantApi.user_id).then((response) => {
+
+    let data = stringify(response.data);
+
+    var writeStream = fs.createWriteStream("PlayerHistory" + valorantApi.user_id + ".json");
+
+    writeStream.write(data);
+    writeStream.end();
+  });
+}
+
+function PlayerMMR() {
+
+  function calculateElo(tier, progress) {
+    return ((tier * 100) - 300) + progress;
+  }
+
+  valorantApi.getPlayerMMR(valorantApi.user_id).then((response) => {
+    if (response.data.LatestCompetitiveUpdate) {
+      const update = response.data.LatestCompetitiveUpdate;
+      var elo = calculateElo(update.TierAfterUpdate, update.RankedRatingAfterUpdate);
+
+
+      var writeStream = fs.createWriteStream("PlayerMMR" + valorantApi.user_id + ".txt");
+
+      writeStream.write("Make Sure Your Last Game Was competitive" + '  /  ' + `Movement: ${update.CompetitiveMovement}` + ' , ' + `Current Tier: ${update.TierAfterUpdate}(${Valorant.Tiers[update.TierAfterUpdate]})` + ' , ' + `Current Tier Progress:${update.RankedRatingAfterUpdate}/100` + ' , ' + `Total Elo: ${elo}`);
+      writeStream.end()
+    } else {
+      console.log("No competitive update available. Have you played a  competitive match yet ? ");
+    }
+
+  });
+}
