@@ -4,16 +4,11 @@ This is an unofficial NodeJS App for interacting with the [VALORANT](https://pla
 
  @liamcottle/valorant.js: https://github.com/liamcottle/valorant.js
 
-IMPORTANT
-```
-npm install @liamcottle/valorant.js'
-npm install json-stringify-safe
-
 ```
 ## Implemented Functions
- Get Match Data from MatchID
- Get Player Match History via Auth
- Get Player MMR via Auth
+ Get Match Data 
+ Get Player Match History
+ Get Player MMR 
  More Comming Soon !
 
 ## License
