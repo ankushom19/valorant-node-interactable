@@ -6,7 +6,7 @@ const stringify = require('json-stringify-safe');
 
 function MatchData() {
 
-  var MatchID = "dd060740-cafa-49fe-b147-509fbf3abf3a";
+  var MatchID = "Your Match ID (Can Be Fetched from Player Match Data)";
   valorantApi.getMatch(MatchID).then((response) => {
 
     let data = stringify(response.data);
